@@ -1,1 +1,55 @@
-<p>app-list works!</p>
+<!-- formulario de alta de tarea -->
+<div class="aa">
+  <form #form="ngForm" method="POST" class="my-4" (ngSubmit)="addTask(form.value)">
+
+    <div class="row">
+      <div class="col-9">
+        <div class="form-group">
+          <label>Tarea</label>
+          <input name="task" type="text" class="form-control" ngModel>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div class="form-group">
+          <label class="lab">Prioridad</label>
+          <select name="priority" class="form-control" ngModel>
+            <option selected value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Descripcion</label>
+      <textarea name="description" class="form-control" rows="3" ngModel></textarea>
+    </div>
+    <input type="submit" class="btn btn-success" value="{{editMode ? 'Update Task' : 'Add Task'}}">
+  </form>
+</div>
+
+<div class="list-group">
+  <li class="element" *ngFor="let task of tasks">
+
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{task.task}}</h5>
+     
+
+    </div>
+
+
+    <p class="mb-1">{{task.description}}</p>
+    <small>Prioridad:{{task.priority}}</small>
+    <table class="actions">
+      <td><button class="btn btn-primary" (click)="showUpdate(task.id)">Update</button></td>
+      <td><button class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button></td>
+      <td><button class="btn btn-success" *ngIf="task.finalizada == false" (click)="finalizar(task.id)">Finalizar</button></td>
+
+    </table>
+  </li>
+
+</div>
