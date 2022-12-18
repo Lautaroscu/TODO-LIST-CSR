@@ -1,7 +1,7 @@
 export interface Tasks {
     'id' : string ,
-    'task' : string , 
-    'description' : string ,
-    'priority' : number ,
-    'finalizada' : boolean
+    'tarea' : string , 
+    'descripcion' : string ,
+    'prioridad' : number ,
+    'finalizada' : number
 }

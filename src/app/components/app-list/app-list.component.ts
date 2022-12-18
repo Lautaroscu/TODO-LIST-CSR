@@ -51,9 +51,9 @@ tasks:Tasks[] = [] ;
     this.id = CurrentId?.id ;
     if(CurrentId){
       this.form.setValue({
-     task : CurrentId.task ,
-     priority : CurrentId.priority ,
-     description : CurrentId.description ,
+     tarea : CurrentId.tarea ,
+     prioridad : CurrentId.prioridad ,
+     descripcion : CurrentId.descripcion ,
     })
     }
     
@@ -70,15 +70,29 @@ tasks:Tasks[] = [] ;
     if(CurrentId){
       console.log('sii');
 
-    this.DataService.finalize(CurrentId.id , this.tasks) 
+    this.DataService.finalize(CurrentId.id) 
     .subscribe(
       s => {
         console.log(s) ;
       }
     )
-  }else{
-    console.log('nooo');
   }
     }
+    desfinalizar(id:string):void{
+      let CurrentId = this.tasks.find((p) =>{
+        return p.id == id
+      })
+      if(CurrentId){
+        console.log('sii');
+  
+      this.DataService.desfinalize(CurrentId.id) 
+      .subscribe(
+        s => {
+          console.log(s) ;
+        }
+      )
+    }
+      }
+    
     
 }

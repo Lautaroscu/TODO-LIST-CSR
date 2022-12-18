@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, Subject, tap } from 'rxjs';
 import { Tasks } from '../components/app-list/interf_tasks';
-const URL = 'https://62b49373da3017eabb0d8683.mockapi.io/api/tasks' ;
+const URL = 'http://localhost:3000/tasks' ;
 
 @Injectable({
   providedIn: 'root'
@@ -44,18 +44,28 @@ private refresh$ = new Subject<void>();
       )
     )
   }
-  public finalize(id:string , task:Tasks[]):Observable<Tasks[]>{
-    return this.http.put<Tasks[]>(`${URL}/${id}` , task)
+  public finalize(id:string):Observable<any>{
+    return this.http.put<any>(`${URL}/finalize/${id}` , {})
     .pipe(
-      tap(tasks => {
-          tasks.forEach(t => {
-            t.finalizada = true;
-            this.refresh$.next() ;
-          })
-      })
+      tap(
+        () => {
+          this.refresh$.next() ;
+
+        }
+      )
     )
   }
-  
+  public desfinalize(id:string):Observable<any>{
+    return this.http.put<any>(`${URL}/desfinalize/${id}` , {}) 
+    .pipe(
+      tap(
+        () => {
+          this.refresh$.next() ;
+
+        }
+      )
+    )
+  }
   public getRefresh():Subject<void>{
     return this.refresh$;
   }
