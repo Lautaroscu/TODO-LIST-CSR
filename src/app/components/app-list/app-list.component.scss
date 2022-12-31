@@ -15,8 +15,24 @@
     list-style: none;
     margin-left: 65%;
     
+    
+}
+li div {
+    margin-top: 5%;
 }
 .finalize {
     text-decoration: line-through;
+}
+.table th{
+color: whitesmoke;
+text-align: center;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+.buttons button {
+    margin-left: 20%;
+    margin-right: 20%;
 }
 

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, Subject, tap } from 'rxjs';
 import { Tasks } from '../components/app-list/interf_tasks';
-const URL = 'http://localhost:3000/tasks' ;
+const URL = 'http://localhost:4000/tasks' ;
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +62,16 @@ private refresh$ = new Subject<void>();
         () => {
           this.refresh$.next() ;
 
+        }
+      )
+    )
+  }
+  public deleteAll():Observable<Tasks[]> {
+    return this.http.delete<Tasks[]>(URL) 
+    .pipe(
+      tap(
+        () => {
+          this.refresh$.next() ;
         }
       )
     )

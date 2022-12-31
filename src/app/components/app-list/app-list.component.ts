@@ -93,6 +93,10 @@ tasks:Tasks[] = [] ;
       )
     }
       }
+      deleteAll(){
+        this.DataService.deleteAll()
+        .subscribe();
+      }
     
     
 }

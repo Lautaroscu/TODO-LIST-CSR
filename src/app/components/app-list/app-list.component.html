@@ -32,26 +32,44 @@
   </form>
 </div>
 
-<div class="list-group" >
-  <li class="element" *ngFor="let task of tasks" [ngClass]="task.finalizada == 1 ? 'finalize' : null">
+<div class="list-group">
+  <table class="table">
+    <thead>
+      <th>Tarea</th>
+      <th>Acciones</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks" >
+         <td>
+        <li class="element" [ngClass]="task.finalizada == 1 ? 'finalize' : null" >
 
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{task.tarea}}</h5>
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{task.tarea}}</h5>
+
+          </div>
+          <p class="mb-1">{{task.descripcion}}</p>
+          <small>Prioridad:{{task.prioridad}}</small>
+
+        </li>
+      </td>
+      <td>
+        <div class="buttons">
+            <button class="btn btn-primary" (click)="showUpdate(task.id)">Update</button>
+      <button class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button>
+      <button class="btn btn-success" *ngIf="task.finalizada == 0" (click)="finalizar(task.id)">Finalizar</button> 
+  
+      <button class="btn btn-success" *ngIf="task.finalizada == 1"
+          (click)="desfinalizar(task.id)">Desfinalizar</button>
+
+        </div>
+    
+      </td>
+      </tr>
      
+    </tbody>
 
-    </div>
+  </table>
 
-
-    <p class="mb-1">{{task.descripcion}}</p>
-    <small>Prioridad:{{task.prioridad}}</small>
-    <table class="actions">
-      <td><button class="btn btn-primary" (click)="showUpdate(task.id)">Update</button></td>
-      <td><button class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button></td>
-      <td><button class="btn btn-success"  *ngIf="task.finalizada == 0" (click)="finalizar(task.id)">Finalizar</button></td>
-      <td><button class="btn btn-success" *ngIf="task.finalizada == 1" (click)="desfinalizar(task.id)">Desfinalizar</button></td>
-
-
-    </table>
-  </li>
+  <button (click)="deleteAll()">Clear</button>
 
 </div>
